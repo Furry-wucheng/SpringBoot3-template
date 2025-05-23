@@ -18,8 +18,18 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new TokenInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/login","/login/admin")
-                .excludePathPatterns("/register");
+                .excludePathPatterns("/login","/register")
+                //排除swagger相关请求
+                .excludePathPatterns(
+                        "/doc.html",
+                        "/v3/api-docs/**",
+                        "/swagger-resources/**",
+                        "/webjars/**",
+                        "/swagger-ui/**",
+                        "/v2/api-docs/**",
+                        "/favicon.ico",
+                        "/.well-known/**"
+                );
     }
 
     //添加跨域处理
